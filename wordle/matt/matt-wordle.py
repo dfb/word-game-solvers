@@ -13,9 +13,14 @@ d = enchant.Dict("en_US")
 
 possible_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                     'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+#insert black letters
 
 wrong_letters = ['s', 'r',  'e', 'o','g', 'u', 'v', 'm', 'p']
-#negative is in the wrong spot
+
+#insert letters as list
+#positive- have the right spot
+#negative- wrong spot but right letteer
+#NOTE this can acceept momre than one letter..i
 my_letters = {
     'h': [2],
     'a': [3],
