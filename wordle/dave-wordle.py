@@ -3,7 +3,10 @@ import sys
 # https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt
 # https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt <-- too few!
 # https://raw.githubusercontent.com/dolph/dictionary/master/ospd.txt
-words = [x.strip() for x in open('ospd.txt').read().split('\n')]
+# https://raw.githubusercontent.com/javierarce/palabras/master/listado-general.txt
+#words = [x.strip() for x in open('listado-general.txt', 'rb').read().decode('utf8').split('\n')]
+#words = [x.strip() for x in open('ospd.txt', 'rb').read().decode('utf8').split('\n')]
+words = [x.strip() for x in open('nytimes_wordle.txt').read().split('\n')]
 words = [x.upper() for x in words if x]
 
 WORD_LEN = 5
@@ -13,13 +16,15 @@ guessedLetters = set()
 unguessedLetters = set('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 while 1:
     print(len(possibles), 'possible words remain')
-    guess = input('Your next guess > ').strip().upper()
+    userInput = input('Your next guess AND game\'s response: ').strip().upper()
+    parts = userInput.split()
+    assert len(parts) == 2
+    guess, response = parts
     assert len(guess) == WORD_LEN
+    assert len(response) == WORD_LEN
+
     guessedLetters |= set(guess)
     unguessedLetters = unguessedLetters.difference(set(guess))
-
-    response = input('Game\'s response to that guess (colors b, y, or g for each letter)> ').strip().upper()
-    assert len(response) == WORD_LEN
 
     # Whittle down the list of possible words
     for i, (letter, color) in enumerate(zip(guess, response)):
